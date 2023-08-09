@@ -1,0 +1,80 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #453939;
+}
+
+.modal_content {
+    width: 500px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.modal_confirm {
+    margin: 0;
+}
+.button_delete,
+.button_cancel,
+.button_update,
+.button_check  {
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 5px;
+    margin: 10px 5px;
+    color: aliceblue;
+    border: 2px solid darkslategray;
+   cursor: pointer;
+}
+.button_update {
+    background-color: rgba(19, 180, 67, 0.884);
+    &:hover {
+        background-color: rgb(58, 131, 67, 0.884);
+    } 
+}
+.button_delete {
+    background-color: rgb(233, 48, 48);
+    &:hover {
+        background-color: rgb(207, 62, 62);
+    }
+}
+
+.button_check {
+    background-color: rgb(26, 24, 187);
+    &:hover {
+        background-color: rgb(41, 35, 124);
+    }
+}
+.button_cancel {
+    background-color: #4d4d50;
+    &:hover {
+        background-color: #37363b;
+    }
+}
+.table {
+width: 100%;
+}
+.input_label {
+    text-align: left;
+    float: left;
+}
+.error_message {
+    color: red;
+    text-align: left;
+    display: block;
+    margin-left: 20px;
+    font-weight: 100;
+}
+.input_field {
+    width: 360px;
+    border: 2px solid rgb(58, 73, 73);
+    padding: 10px;
+    border-radius: 5px;
+}

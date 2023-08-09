@@ -1,0 +1,14 @@
+.input_date {
+    margin: 0 10px;
+    padding: 7px 11px;
+    border-radius: 5px;
+    background: none;
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+    background: none;
+    color: aliceblue;
+    &:focus {
+        outline: none;
+    }
+}

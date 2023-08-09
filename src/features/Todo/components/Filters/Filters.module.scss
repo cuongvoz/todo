@@ -1,0 +1,33 @@
+.box_filter {
+    border: 2px solid #4a4950;
+    border-radius: 5px;
+    margin: 10px auto;
+    background: linear-gradient(222deg, rgba(27, 25, 36, 1) 42%, rgba(23, 15, 15, 1) 100%);
+    align-items: center;
+    width: 700px;
+    justify-content: space-between;
+    color: aliceblue;
+    font-weight: bold;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+}
+
+.filter {
+    padding: 10px;
+    cursor: pointer;
+    &:hover {
+        background-color: #4a4950;
+    }
+}
+
+.item_active {
+    background-color: #4a4950;
+}
+.quantity {
+    background-color: #ff0061;
+    width: 24px;
+    border-radius: 50%;
+    height: 10px;
+    display: inline-table;
+}
