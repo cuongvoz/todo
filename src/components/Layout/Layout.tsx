@@ -9,7 +9,7 @@ import { filterStatus } from '../../shared/constants/constants';
 import { toast, ToastContainer } from 'react-toastify';
 import { useTodoContext } from '../../features/Todo/contexts/TodoProvider';
 import { actionCreate, actionRequest, setTodoList } from '../../shared/actions/actions';
-import { validateForm } from '../../util/validation/createTaskValidate';
+import { validateForm } from '../../util/validation/validation';
 import { getFormattedDate, getToDay } from '../../util/dateTime/dateTime';
 
 const Layout: React.FC = (): JSX.Element => {
@@ -71,7 +71,7 @@ const Layout: React.FC = (): JSX.Element => {
     <h1 className={styles.box_datetime}>{`${getToDay()} ${getFormattedDate()}`} <i className="fa-solid fa-thumbtack"></i></h1>
     <h3>"Every day should be a good day. People fool themselves that they'll be here forever."</h3>
     <div className={`${styles.box_add_task} ${errorMessage !== '' && isChange && styles.is_invalid}`}>
-      <i className="fa fa-bars"></i>
+      <i className={`fa fa-bars ${styles.menuItem}`}></i>
       <input className={styles.task_title} name='title' value={title} onChange={handleChange} placeholder='Add new task...' />
       <DatePicker dateTime={dateTime} setDatetime={handleChange} />
       <button disabled={isLoading} className={styles.button_add} onClick={addNewTask}><i className="fa-solid fa-plus"></i></button>

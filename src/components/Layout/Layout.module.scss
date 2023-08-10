@@ -10,14 +10,17 @@
 }
 .box_add_task {
     border: 2px solid #4a4950;
-    padding: 5px 0px 5px 30px;
+    padding: 5px 0px;
     border-radius: 5px;
     margin: 0 auto;
     background: linear-gradient(222deg, rgba(27,25,36,1) 42%, rgba(23,15,15,1) 100%);
     display: flex;
     align-items: center;
-    width: 670px;
+    width: 95%;
     justify-content: space-between;
+}
+.menuItem {
+    margin: 0 20px;
 }
 .is_invalid {
     background: #530f18;
@@ -51,12 +54,26 @@
     color: bisque;
 }
 .task_title {
+    text-overflow: ellipsis;
     color: aliceblue;
     font-weight: bold;
     font-size: 17px;
+    width: 50%;
     border: none;
     background: none;
     &:focus {
         outline: none;
+    }
+}
+@media screen and (max-width: 1024px) {
+    .container {
+        width: 80%;
+        padding: 20px;
+    }
+}
+@media screen and (max-width: 600px) {
+    .container {
+        padding: 10px;
+        width: 90%;
     }
 }

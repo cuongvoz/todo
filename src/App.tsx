@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import Layout from './components/Layout/Layout';
 import dotenv from 'dotenv';
-import { ToastContainer } from 'react-toastify';
 import TodoProvider from './features/Todo/contexts/TodoProvider';
 
 dotenv.config();

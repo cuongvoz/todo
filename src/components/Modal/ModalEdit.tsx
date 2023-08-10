@@ -5,8 +5,9 @@ import { editTask } from '../../service/todo';
 import { toast } from 'react-toastify';
 import { useTodoContext } from '../../features/Todo/contexts/TodoProvider';
 import { actionEdit, actionRequest } from '../../shared/actions/actions';
-import { validateForm } from '../../util/validation/createTaskValidate';
+import { validateForm } from '../../util/validation/validation';
 import { EDIT } from '../../shared/constants/constants';
+import { LoadingSpinnerNew } from '../Loading/LoadingSpinner';
 
 interface ModalProps {
     isOpen: (type: string) => boolean;
@@ -16,12 +17,13 @@ interface ModalProps {
 }
 
 const ModalEdit: FC<ModalProps> = ({ isOpen, onClose, todo, getTodos }): JSX.Element => {
-    const { dispatch, state: { isLoading } } = useTodoContext()
+    const { dispatch } = useTodoContext()
     if (!isOpen(EDIT)) return <></>;
-    const [todoEdit, setTodoEdit] = useState<Todo>(todo)
+    const [todoEdit, setTodoEdit] = useState<Todo>(todo);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const editTaskTodo = async (): Promise<void> => {
+        setIsLoading(true);
         if (isValid) {
-            dispatch(actionRequest());
             await editTask(todoEdit).then(data => {
                 onClose(EDIT);
                 toast.success('Update task success!');
@@ -30,6 +32,7 @@ const ModalEdit: FC<ModalProps> = ({ isOpen, onClose, todo, getTodos }): JSX.Ele
                 toast.error('Update task failure!');
             });
         }
+        setIsLoading(false);
     };
 
     const [isValid, setIsValid] = useState<boolean>(false)
@@ -75,8 +78,12 @@ const ModalEdit: FC<ModalProps> = ({ isOpen, onClose, todo, getTodos }): JSX.Ele
                         </tbody>
                     </table>
                 </div>
-                <button className={styles.button_cancel} onClick={() => onClose(EDIT)}>Cancel</button>
-                <button className={styles.button_update} onClick={() => editTaskTodo()}>Update</button>
+                {
+                    isLoading ? <LoadingSpinnerNew /> : <>
+                        <button disabled={isLoading} className={styles.button_cancel} onClick={() => onClose(EDIT)}>Cancel</button>
+                        <button disabled={isLoading} className={styles.button_update} onClick={() => editTaskTodo()}>Update</button>
+                    </>
+                }
             </div>
         </div>
     );

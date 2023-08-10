@@ -6,18 +6,20 @@ import { toast } from 'react-toastify';
 import { useTodoContext } from '../../features/Todo/contexts/TodoProvider';
 import { actionRequest, deleteTaskTodo } from '../../shared/actions/actions';
 import { DELETE } from '../../shared/constants/constants';
+import { LoadingSpinnerNew } from '../Loading/LoadingSpinner';
 
 interface ModalProps {
-  isOpen:(type: string) => boolean;
-  onClose:(type: string) => void;
+  isOpen: (type: string) => boolean;
+  onClose: (type: string) => void;
   todo: Todo;
 }
 
 const ModalRemove: FC<ModalProps> = ({ isOpen, onClose, todo }): JSX.Element => {
   if (!isOpen(DELETE)) return <></>;
   const { dispatch } = useTodoContext();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const deleteTask = async (id: number): Promise<void> => {
-    dispatch(actionRequest());
+    setIsLoading(true);
     await deleteTaskById(id).then(
       () => {
         onClose(DELETE);
@@ -27,6 +29,7 @@ const ModalRemove: FC<ModalProps> = ({ isOpen, onClose, todo }): JSX.Element => 
     ).catch(() => {
       toast.error('Remove task failure!');
     })
+    setIsLoading(false);
   };
   const getIsDoneText = () => {
     return todo.isDone ? 'is done ' : 'is not done yet ?'
@@ -39,8 +42,12 @@ const ModalRemove: FC<ModalProps> = ({ isOpen, onClose, todo }): JSX.Element => 
         </h1>
         <h3>Are you sure you want to delete this task?</h3>
         <h2>{`Task ${todo.title} ${getIsDoneText()} `}</h2>
-        <button className={styles.button_cancel} onClick={() => onClose(DELETE)}>Cancel</button>
-        <button className={styles.button_delete} onClick={() => deleteTask(todo.id || -1)}>Delete</button>
+        {
+          isLoading ? <LoadingSpinnerNew /> : <>
+            <button className={styles.button_cancel} onClick={() => onClose(DELETE)}>Cancel</button>
+            <button className={styles.button_delete} onClick={() => deleteTask(todo.id || -1)}>Delete</button>
+          </>
+        }
       </div>
     </div>
   );
